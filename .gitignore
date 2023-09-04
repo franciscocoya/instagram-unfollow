@@ -31,3 +31,5 @@ test-results/
 playwright-report/
 
 src/data/
+
+.env
