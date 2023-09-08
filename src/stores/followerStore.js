@@ -5,7 +5,8 @@ const useFollowerStore = defineStore({
   state: () => ({
     followers: [],
     following: [],
-    unfollowers: []
+    unfollowers: [],
+    unfollowersFiltered: []
   }),
 
   actions: {
@@ -17,6 +18,11 @@ const useFollowerStore = defineStore({
     },
     setUnfollowers(unfollowers) {
       this.unfollowers = unfollowers
+    },
+    filterUnfollowersByUsername(username) {
+      this.unfollowersFiltered = this.unfollowers.filter((unfollower) => {
+        return unfollower.value.includes(username)
+      })
     }
   }
 })
