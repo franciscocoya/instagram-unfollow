@@ -1,31 +1,29 @@
-import { load } from 'cheerio'
-import axios from 'axios'
+// import { chromium } from 'playwright'
 
-const getInstagramAccountPublicInfo = async (username) => {
-  const page = await axios.get(`https://www.instagram.com/${username}/`, {
-    headers:{
-        'Access-Control-Allow-Origin': '*'
-    },
-    params: {
-      __a: 1
-    }
-  })
-  console.log(page.data)
+const getInstagramAccountInfoByUsername = async (username) => {
+  // const browser = await chromium.launch({ headless: true })
+  // const context = await browser.newContext()
+  // const page = await context.newPage()
+  // await page.goto(`https://www.instagram.com/${username}/`)
+  // await page.waitForSelector('div.-vDIg')
+  // const accountInfo = await page.evaluate(() => {
+  //   const accountInfo = {}
+  //   accountInfo.username = document.querySelector('h1').innerText
+  //   accountInfo.profileImage = document.querySelector('img').src
+  //   accountInfo.posts = document.querySelector('span.g47SY').innerText
+  //   accountInfo.followers = document.querySelector(
+  //     'a[href="/franciscocoya/followers/"] > span'
+  //   ).innerText
+  //   accountInfo.following = document.querySelector(
+  //     'a[href="/franciscocoya/following/"] > span'
+  //   ).innerText
+  //   accountInfo.bio = document.querySelector('div.-vDIg > span').innerText
+  //   return accountInfo
+  // })
+  // await browser.close()
 
-  //   const $ = load(page.data)
-
-  //   const profileImage = $(
-  //     'img.xpdipgo.x6umtig.x1b1mbwd.xaqea5y.xav7gou.xk390pu.x5yr21d.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x11njtxf.xh8yej3"]'
-  //   ).attr('src')
-
-  //   const fullName = $(
-  //     'span.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x193iq5w.xeuugli.x1fj9vlw.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1i0vuye.xvs91rp.x1s688f.x5n08af.x10wh9bi.x1wdrske.x8viiok.x18hxmgj'
-  //   ).text()
-
-  //   return {
-  //     profileImage,
-  //     fullName
-  //   }
+  // console.log('accountInfo', accountInfo)
+  // return accountInfo
 }
 
-export { getInstagramAccountPublicInfo }
+export { getInstagramAccountInfoByUsername }

@@ -5,9 +5,10 @@ import { readJsonFile, readMultipleJsonFiles } from './lib/util.js'
 import { useFollowerStore } from './stores/followerStore.js'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { InformationCircleIcon } from '@heroicons/vue/24/outline'
-import { getInstagramAccountPublicInfo } from './lib/scraper.js'
 
 import { getUnfollowers, mergeMultipleArrays } from './lib/main.js'
+
+import { getInstagramAccountInfoByUsername } from './lib/scraper.js'
 
 const followerStore = useFollowerStore()
 
@@ -49,14 +50,22 @@ const filterUnfollowersByUsername = (username) => {
     )
   }
 }
+
+const resetAllFields = () => {
+  followerStore.setFollowers([])
+  followerStore.setFollowing([])
+  unfollowers.value = []
+}
+
+// getInstagramAccountInfoByUsername('kikocphoto')
 </script>
 
 <template>
-  <main class="flex flex-col justify-between gap-16">
+  <main class="flex flex-col justify-between">
     <!-- textarea for followers -->
     <!-- textarea for following accounts -->
 
-    <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-5 mb-10">
       <h1 class="text-4xl font-bold tracking-tight text-center text-white sm:text-6xl pt-10">
         Check Instagram Unfollowers
       </h1>
@@ -67,16 +76,21 @@ const filterUnfollowersByUsername = (username) => {
         >.
       </h2>
     </div>
-    <div class="grid grid-cols-2 gap-20 px-40">
+    <div
+      :class="`grid ${
+        unfollowers.length > 0 ? 'lg:grid-cols-2' : 'grid-cols-1 md:w-3/5 mx-auto'
+      } gap-20 px-40 pb-10`"
+    >
       <section class="flex flex-col gap-5">
-        <!-- File upload section -->
-
         <div class="flex flex-col flex-wrap gap-10">
           <div class="flex flex-col gap-3">
-            <h2 class="text-2xl font-semibold text-pink-200 flex flex-row justify-start items-center gap-2">
+            <h2
+              class="text-2xl font-semibold text-pink-200 flex flex-row justify-start items-center gap-2"
+            >
               <InformationCircleIcon class="w-6 h-6 text-pink-50" />
               Followers
             </h2>
+            <p>Upload the file/s name followers_x.json (x is a number) from your Instagram data.</p>
             <BaseTextArea
               :onchange="handleUploadFollowers"
               :multiple="true"
@@ -86,10 +100,13 @@ const filterUnfollowersByUsername = (username) => {
           </div>
 
           <div class="flex flex-col gap-3">
-            <h2 class="text-2xl font-semibold text-pink-200 flex flex-row justify-start items-center gap-2">
+            <h2
+              class="text-2xl font-semibold text-pink-200 flex flex-row justify-start items-center gap-2"
+            >
               <InformationCircleIcon class="w-6 h-6 text-pink-50" />
               Following
             </h2>
+            <p>Upload the file whose name is following.json from your Instagram data.</p>
             <BaseTextArea
               :onchange="handleUploadFollowing"
               :counter="followerStore.following?.length"
@@ -98,16 +115,26 @@ const filterUnfollowersByUsername = (username) => {
           </div>
         </div>
 
-        <button
-          @click.prevent="showUnfollowers"
-          type="button"
-          class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-pink-500 text-white hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-        >
-          Show unfollowers
-        </button>
+        <div class="w-100 grid grid-cols-3 gap-5">
+          <button
+            @click.prevent="showUnfollowers"
+            type="button"
+            class="col-span-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-pink-500 text-white hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+          >
+            Show unfollowers
+          </button>
+
+          <button
+            @click.prevent="resetAllFields"
+            type="button"
+            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-gray-200 text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+          >
+            Check new account
+          </button>
+        </div>
       </section>
 
-      <div class="flex flex-col gap-5">
+      <div v-if="unfollowers?.length > 0" class="flex flex-col gap-5">
         <h2 v-if="unfollowers?.length > 0" class="text-xl font-light">
           Showing {{ unfollowers?.length }} accounts which not follow you back
         </h2>
@@ -127,23 +154,47 @@ const filterUnfollowersByUsername = (username) => {
         <section
           v-if="unfollowers?.length > 0"
           id="unfollower-list-section"
-          class="h-96 overflow-y-visible overflow-x-hidden w-full bg-gray-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 py-5 px-10"
+          class="h-96 overflow-y-visible overflow-x-hidden w-full bg-gray-300 rounded-md backdrop-filter backdrop-blur-sm bg-opacity-10 py-5 px-10"
         >
           <ul v-if="unfollowers?.length > 0" role="list" class="h-full w-full">
             <li v-for="(unfollower, index) in unfollowers" :key="index" class="py-5">
               <div class="flex flex-row justify-between gap-16">
                 <div class="flex-shrink-0 group block">
                   <div class="flex items-center">
-                    <img
-                      class="inline-block flex-shrink-0 h-[3.875rem] w-[3.875rem] rounded-full"
-                      src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                      alt="Image Description"
-                    />
+                    <span
+                      class="inline-block h-[2.875rem] w-[2.875rem] bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <svg
+                        class="h-full w-full text-gray-300"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.62854"
+                          y="0.359985"
+                          width="15"
+                          height="15"
+                          rx="7.5"
+                          fill="white"
+                        />
+                        <path
+                          d="M8.12421 7.20374C9.21151 7.20374 10.093 6.32229 10.093 5.23499C10.093 4.14767 9.21151 3.26624 8.12421 3.26624C7.0369 3.26624 6.15546 4.14767 6.15546 5.23499C6.15546 6.32229 7.0369 7.20374 8.12421 7.20374Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M11.818 10.5975C10.2992 12.6412 7.42106 13.0631 5.37731 11.5537C5.01171 11.2818 4.69296 10.9631 4.42107 10.5975C4.28982 10.4006 4.27107 10.1475 4.37419 9.94123L4.51482 9.65059C4.84296 8.95684 5.53671 8.51624 6.30546 8.51624H9.95231C10.7023 8.51624 11.3867 8.94749 11.7242 9.62249L11.8742 9.93184C11.968 10.1475 11.9586 10.4006 11.818 10.5975Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
                     <div class="ml-3">
                       <h3 class="font-semibold text-gray-800 dark:text-white">
                         {{ unfollower.value }}
                       </h3>
-                      <p class="text-sm font-medium text-gray-400">maria@gmail.com</p>
+                      <!-- <p class="text-sm font-medium text-gray-400">maria@gmail.com</p> -->
                     </div>
                   </div>
                 </div>
@@ -166,13 +217,6 @@ const filterUnfollowersByUsername = (username) => {
         </span>
       </div>
     </div>
-    <!-- <footer class="bg-black text-center lg:text-left w-100">
-      <div class="p-4 text-center text-neutral-700 dark:text-neutral-200">
-        © {{ new Date().getFullYear() }} Francisco Coya. All rights reserved. GitHub
-        repo{'https://github.com/franciscocoya'}
-      </div>
-      
-    </footer> -->
     <footer class="mt-auto w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-black">
       <div class="text-center">
         <div>
@@ -237,10 +281,26 @@ const filterUnfollowersByUsername = (username) => {
 </template>
 
 <style scoped>
+main::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.1;
+  background-image: url('@/assets/bg-home-4.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 #unfollower-list-section {
-  -webkit-box-shadow: 7px 7px 69px -4px rgba(255, 122, 202, 0.1);
-  -moz-box-shadow: 7px 7px 69px -4px rgba(255, 122, 202, 0.1);
-  box-shadow: 7px 7px 69px -4px rgba(255, 122, 202, 0.1);
+  -webkit-box-shadow: 7px 7px 69px -4px rgba(255, 122, 202, 0.2);
+  -moz-box-shadow: 7px 7px 69px -4px rgba(255, 122, 202, 0.2);
+  box-shadow: 7px 7px 69px -4px rgba(255, 122, 202, 0.2);
 }
 
 #unfollower-list-section::-webkit-scrollbar {

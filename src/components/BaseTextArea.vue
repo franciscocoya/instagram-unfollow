@@ -23,9 +23,9 @@ function handleUploadFile() {
 </script>
 
 <template>
-  <div class="max-w-xl relative">
+  <div class="relative w-full">
     <label
-      class="flex justify-center w-full h-32 px-4 transition bg-transparent border-2 border-gray-200 border-dashed rounded-md appearance-none cursor-pointer hover:border-pink-400 focus:outline-none focus:border-pink-400"
+      class="flex justify-center w-full h-32 px-4 transition bg-gray-400 backdrop-filter backdrop-blur-sm bg-opacity-10 border-2 border-gray-200 border-dashed rounded-md appearance-none cursor-pointer hover:border-pink-400 focus:outline-none focus:border-pink-400"
     >
       <span class="flex items-center space-x-2">
         <ArrowUpTrayIcon class="w-6 h-6 text-gray-200" />

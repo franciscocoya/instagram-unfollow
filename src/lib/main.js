@@ -1,5 +1,4 @@
 import axios from 'axios'
-import cheerio from 'cheerio'
 
 const getUnfollowers = (followersArr, followingArr) => {
 
@@ -29,19 +28,7 @@ const mergeMultipleArrays = (...arrs) => {
  * @returns
  */
 const getInstagramUserInfo = async (username) => {
-  try {
-    const response = await axios.get(`https://www.instagram.com/${username}`, {
-      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-      'Access-Control-Allow-Credentials': true // Required for cookies, authorization headers with HTTPS
-    })
-    const $ = cheerio.load(response.data)
 
-    // Find the profile image URL in the HTML
-    return $('meta[property="og:image"]').attr('content')
-  } catch (error) {
-    console.error('Error fetching profile image:', error)
-    return null
-  }
 }
 
 export { getUnfollowers, getInstagramUserInfo, mergeMultipleArrays }

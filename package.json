@@ -5,20 +5,21 @@
     "email": "info@franciscocoya.dev"
   },
   "description": "Tool to check who is not following you back on Instagram. Built with Vue 3, Tailwind CSS and Playwright. This is not official software and is not associated with Instagram.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test:unit": "vitest",
-    "test:e2e": "playwright test",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@headlessui/vue": "^1.7.16",
     "@heroicons/vue": "^2.0.18",
+    "@playwright/test": "^1.37.1",
     "@preline/tooltip": "^1.5.0",
     "autoprefixer": "^10.4.15",
     "axios": "^1.5.0",
@@ -26,6 +27,7 @@
     "pinia": "^2.1.6",
     "postcss": "^8.4.29",
     "preline": "^1.9.0",
+    "resolve": "^1.22.4",
     "tailwindcss": "^3.3.3",
     "vue": "^3.3.4"
   },
@@ -38,6 +40,7 @@
     "eslint": "^8.46.0",
     "eslint-plugin-vue": "^9.16.1",
     "jsdom": "^22.1.0",
+    "playwright": "^1.37.1",
     "prettier": "^3.0.0",
     "vite": "^4.4.9"
   }

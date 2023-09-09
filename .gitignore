@@ -33,3 +33,6 @@ playwright-report/
 src/data/
 
 .env
+/test-results/
+/playwright-report/
+/playwright/.cache/
