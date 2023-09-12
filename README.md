@@ -1,7 +1,7 @@
 # Check Instagram Unfollowers Tool
 Disclaimer: This is an unofficial Instagram tool. It was created for personal and education purposes. The website does not store any data. 
 
-![imagen](https://github.com/franciscocoya/instagram-unfollow/assets/56480356/b7e31c83-eb7e-45bb-8fea-2fcc6746ccbf)
+![imagen](https://github.com/franciscocoya/instagram-unfollow/assets/56480356/c3b777a8-3044-4d77-b52b-381a806229d4)
 
 ## Local setup
 
