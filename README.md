@@ -16,7 +16,7 @@ You can find a short tutorial which explain all of that. The Wiki of this reposi
 
 ## Bugs and issues
 
-Create a new specific issue which contains a short title. The body must be the most descriptive posible in order to solve the problem.
+Create a new specific issue with a short title. The body should be as descriptive as possible to solve the problem.
 
 ## Collaboration
 
