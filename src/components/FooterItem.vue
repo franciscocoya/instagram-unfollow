@@ -3,8 +3,8 @@
     <div class="text-center">
       <div>
         <a
-          class="flex-none text-xl font-semibold text-black dark:text-white"
-          href="#"
+          class="flex-none text-xl font-semibold text-black dark:text-white hover:bg-transparent hover:text-pink-500 transition dark:hover:text-pink-200"
+          href="/"
           aria-label="Brand"
           >Instagram Unfollower Checker tool
           <span
