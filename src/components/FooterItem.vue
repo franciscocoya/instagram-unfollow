@@ -6,7 +6,11 @@
           class="flex-none text-xl font-semibold text-black dark:text-white"
           href="#"
           aria-label="Brand"
-          >Instagram Unfollower Checker tool</a
+          >Instagram Unfollower Checker tool
+          <span
+            class="inline-flex items-center gap-1.5 py-1 px-2 rounded-full text-xs font-normal bg-pink-500 text-gray-50"
+            >v0.0.1</span
+          ></a
         >
       </div>
 

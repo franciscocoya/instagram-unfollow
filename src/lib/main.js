@@ -1,7 +1,6 @@
-import axios from 'axios'
+const ALLOWED_TYPES = ['application/JSON']
 
 const getUnfollowers = (followersArr, followingArr) => {
-
   const followerNames = followersArr.map((follower) => follower.value)
 
   return followingArr.filter((follower) => {
@@ -15,10 +14,20 @@ const getUnfollowers = (followersArr, followingArr) => {
  * @param  {...any} followersJsonFiles Contains all JSON files which have current user followers.
  */
 const mergeMultipleArrays = (...arrs) => {
+  if (!arrs) {
+    return []
+  }
+
   // merge all json files into one array with values
   return arrs.reduce((acc, curr) => {
     return [...acc, ...curr]
   }, [])
+}
+
+const checkJsonFileHasValidData = (jsonFile) => {
+  if (!jsonFile || !ALLOWED_TYPES.includes(jsonFile.type)) {
+    return false
+  }
 }
 
 /**
@@ -27,8 +36,6 @@ const mergeMultipleArrays = (...arrs) => {
  * @param {*} username From which user to retrieve the profile image URL.
  * @returns
  */
-const getInstagramUserInfo = async (username) => {
+const getInstagramUserInfo = async (username) => {}
 
-}
-
-export { getUnfollowers, getInstagramUserInfo, mergeMultipleArrays }
+export { getUnfollowers, getInstagramUserInfo, mergeMultipleArrays, checkJsonFileHasValidData }

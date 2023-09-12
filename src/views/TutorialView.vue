@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import BaseButtonItem from '@/components/buttons/BaseButtonItem.vue'
+import { WrenchIcon } from '@heroicons/vue/24/solid'
 
 const router = useRouter()
 
@@ -24,6 +25,7 @@ const handleRedirectToInstagramHelp = () => {
         role="button"
         @click="router.push({ name: 'home' })"
       >
+        <WrenchIcon class="w-6 h-6 text-gray-600" />
         Use Now
       </button>
     </div>
