@@ -1,60 +1,23 @@
-# instagram-unfollow
+# Check Instagram Unfollowers Tool
+Disclaimer: This is an unofficial Instagram tool. It was created for personal and education purposes. The website does not store any data. 
 
-This template should help get you started developing with Vue 3 in Vite.
+![imagen](https://github.com/franciscocoya/instagram-unfollow/assets/56480356/b7e31c83-eb7e-45bb-8fea-2fcc6746ccbf)
 
-## Recommended IDE Setup
+## Local setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
+Run the project locally using this command:
+```shell
 npm run dev
 ```
 
-### Compile and Minify for Production
+## How to use this tool
 
-```sh
-npm run build
-```
+You can find a short tutorial which explain all of that. The Wiki of this repository this tutorial in spanish.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Bugs and issues
 
-```sh
-npm run test:unit
-```
+Create a new specific issue which contains a short title. The body must be the most descriptive posible in order to solve the problem.
 
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
+## Collaboration
 
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+You can request to collaborate to this project via email to info@franciscocoya.dev
