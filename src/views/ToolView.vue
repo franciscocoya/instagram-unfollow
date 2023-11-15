@@ -7,6 +7,8 @@ import { useFollowerStore } from '@/stores/followerStore.js'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { InformationCircleIcon } from '@heroicons/vue/24/outline'
 
+import Button from "@/components/ui/button/Button.vue";
+
 import { getUnfollowers, mergeMultipleArrays } from '@/lib/main.js'
 
 const router = useRouter()
@@ -41,9 +43,8 @@ const handleUploadFollowers = (event) => {
 const handleUploadFollowing = (event) => {
   try {
     readJsonFile(event, event.target.files[0]).then((followings) => {
-      
       console.log(event.target.files[0])
-      
+
       followerStore.setFollowing(
         followings.relationships_following.map((following) => ({
           value: following.string_list_data[0].value,
@@ -96,13 +97,20 @@ const resetAllFields = () => {
           >This website does not store any data</span
         >.
       </h2>
-      <button
+
+      <Button
+        role="button"
+        @click="router.push({ name: 'tutorial' })">
+        See tutorial
+      </Button>
+
+      <!-- <button
         class="w-[200px] py-3 px-4 mx-auto inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-gray-50 text-gray-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-gray-100 focus:ring-offset-2 transition-all text-lg dark:focus:ring-offset-gray-800"
         role="button"
         @click="router.push({ name: 'tutorial' })"
       >
         See tutorial
-      </button>
+      </button> -->
     </div>
     <div
       :class="`grid ${

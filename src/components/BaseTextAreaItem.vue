@@ -15,6 +15,7 @@ defineProps({
     default: 'files selected'
   }
 })
+
 const emit = defineEmits(['onchange'])
 
 function handleUploadFile() {
